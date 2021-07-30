@@ -6,7 +6,7 @@ library(ggplot2)
 library(plyr)
 library(dplyr)
 
-### Set File Path for Window
+### Set File Path for Window Environment
 setwd('C:/Users/LeeSooHwan/Desktop/DataVisualization-ZoomProj')
 
 ### Read Raw Data
@@ -52,10 +52,9 @@ data_summary <- function(data, varname, groupnames){
 # Data Preprocessing
 previousExperience <- read.csv(file = "./rawData/questionnaire/previousExperience.csv", header=T, fileEncoding="UTF-8-BOM")
 previousExperience$kind <- as.factor(previousExperience$kind)
-pe_summary <- data_summary(ToothGrowth, varname="len", groupnames=c("supp", "dose"))
-# Convert dose to a factor variable
-df2$dose=as.factor(df2$dose)
-head(df2)
+previousExperience$meeting <- as.factor(previousExperience$meeting)
+pe_summary <- data_summary(ToothGrowth, varname="value", groupnames=c("meeting", "kind"))
+
 
 # Data Visualization
 
