@@ -6,6 +6,12 @@ library(ggplot2)
 library(plyr)
 library(dplyr)
 
+# --------------- #
+# RED: "#F8766D"  #
+# BLUE: "#01BFC4" #
+# --------------- #
+
+
 ### Set File Path for Window Environment
 setwd('C:/Users/LeeSooHwan/Desktop/DataVisualization-ZoomProj')
 ### Set File Path for Mac Environment
@@ -85,12 +91,13 @@ pe_summary$ciVal = as.numeric(pe_summary$ciVal)
 # Default bar plot with 95% confidence level error bar
 pe_summary$kind <- factor(pe_summary$kind, level = c("experience", "participation"))
 p <- ggplot(pe_summary, aes(x=kind, y=meanVal, fill=meeting)) + 
+  coord_cartesian(ylim = c(1, 7)) +
+  scale_y_continuous(breaks = c(1,2,3,4,5,6,7)) + 
   geom_bar(stat="identity", color="black", position=position_dodge()) +
-  geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9)) +
-  scale_y_continuous(limits = c(0,7))
+  geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9))
 print(p)
 # Finished bar plot
-p+labs(title="Previous Experience for On/Offline Meeting", x="Previous Expreience", y = "Score", fill = "Meeting")
+p+labs(title="Previous Experience for On/Offline Meeting", x="Previous Expreience", y = "Score", fill = "Meeting") + theme(plot.title = element_text(hjust = 0.5))
 
 # paried t-test for experience
 t.test(subset(previousExperience, meeting == "offline" & kind == "experience")$value 
@@ -129,7 +136,8 @@ opc_summary$purpose <- factor(opc_summary$purpose, level = c("class", "meeting")
 p <- ggplot(opc_summary, aes(x=purpose, y=meanVal)) + 
   geom_bar(stat="identity", color="BLACK", fill = "#F8766D", position=position_dodge()) +
   geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9)) +
-  scale_y_continuous(limits = c(0,7))
+  scale_y_continuous(breaks = c(1,2,3,4,5,6,7)) +
+  coord_cartesian(ylim = c(1, 7))
 print(p)
 # Finished bar plot
 p+labs(title="Participation Change depend on the Meeting", x="Online Meeting Purpose", y = "Score") + theme(plot.title = element_text(hjust = 0.5))
@@ -162,10 +170,12 @@ os_summary$ciVal = as.numeric(os_summary$ciVal)
 
 # Default bar plot with 95% confidence level error bar
 os_summary$satisfaction <- factor(os_summary$satisfaction, level = c("overall", "verbal", "nonVerbal"))
-p <- ggplot(os_summary, aes(x=satisfaction, y=meanVal, fill = osPosition)) + 
+p <- ggplot(os_summary, aes(x=satisfaction, y=meanVal, fill = satisfaction)) + 
   geom_bar(stat="identity", color="BLACK", position=position_dodge()) +
   geom_errorbar(aes(ymin=meanVal-ciVal, ymax=meanVal+ciVal), width=.2,position=position_dodge(.9)) +
-  scale_y_continuous(limits = c(0,7)) + scale_fill_manual(values = c("overall" = "#F8766D","verbal" = "#01BFC4", 'nonVerbal' = '#01BFC4'))
+  scale_y_continuous(breaks = c(1,2,3,4,5,6,7)) + 
+  coord_cartesian(ylim = c(1, 7)) +
+  scale_fill_manual(values = c("overall" = "#01BFC4","verbal" = "#01BFC4", 'nonVerbal' = '#01BFC4'))
 print(p)
 # Finished bar plot
 p+labs(title="Satisfaction of Online Meeting", x="", y = "Score") + theme(legend.position="none", plot.title = element_text(hjust = 0.5))
@@ -173,3 +183,4 @@ p+labs(title="Satisfaction of Online Meeting", x="", y = "Score") + theme(legend
 # paired t-test
 t.test(subset(onlineSatisfaction, satisfaction == "verbal")$value 
        - subset(onlineSatisfaction, satisfaction =="nonVerbal")$value)
+
