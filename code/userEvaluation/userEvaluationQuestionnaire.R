@@ -1,0 +1,152 @@
+#install.package("")
+install.packages("ggplot2")
+install.packages("pylr")
+install.packages("dplyr")
+library(ggplot2)
+library(plyr)
+library(dplyr)
+
+# --------------- #
+# RED: "#F8766D"  #
+# BLUE: "#01BFC4" #
+# --------------- #
+
+### Set File Path for Window Environment
+setwd('C:/Users/LeeSooHwan/Desktop/github/DataVisualization-ZoomProj')
+### Set File Path for Mac Environment
+setwd("/Users/Soohwan/Desktop/DataVisualization-ZoomProj")
+
+
+### Read Raw Data
+questionnaireControl <- read.csv(file = "./data/userEvaluation/revisedData/questionnaireControl.csv", header=T, fileEncoding="UTF-8-BOM")
+questionnaireExperimental <- read.csv(file = "./data/userEvaluation/revisedData/questionnaireExperimental.csv", header=T, fileEncoding="UTF-8-BOM")
+questionnaireMerge <- read.csv(file = "./data/userEvaluation/revisedData/questionnaireMerge.csv", header=T, fileEncoding="UTF-8-BOM")
+experimentalSystemEvaluation <- read.csv(file = "./data/userEvaluation/revisedData/experimentalSystemEvaluation.csv", header=T, fileEncoding="UTF-8-BOM")
+
+
+### Start Y axis from n
+require(scales)
+my_trans <- function(from=0) 
+{
+  trans <- function(x) x-from
+  inv <- function(x) x+from
+  trans_new("myscale", trans, inv, 
+            domain = c(from, Inf))
+}
+
+
+### Set factor for questionnaireControl & questionnaireExperimental
+questionnaireControl$measure <- as.factor(questionnaireControl$measure)
+questionnaireExperimental$measure <- as.factor(questionnaireExperimental$measure)
+
+
+### Set variables for questionnaireControl
+controlSO = subset(questionnaireControl$value, questionnaireControl$measure == 'SO')
+controlSP1 = subset(questionnaireControl$value, questionnaireControl$measure == 'SP1')
+controlSP2 = subset(questionnaireControl$value, questionnaireControl$measure == 'SP2')
+controlPNGA = subset(questionnaireControl$value, questionnaireControl$measure == 'PNGA')
+controlprogress1 = subset(questionnaireControl$value, questionnaireControl$measure == 'progress1')
+controlprogress2 = subset(questionnaireControl$value, questionnaireControl$measure == 'progress2')
+controlparticipation = subset(questionnaireControl$value, questionnaireControl$measure == 'participation')
+controlfeedback1 = subset(questionnaireControl$value, questionnaireControl$measure == 'feedback1')
+controlfeedback2 = subset(questionnaireControl$value, questionnaireControl$measure == 'feedback2')
+controlsocialPresence = subset(questionnaireControl$value, questionnaireControl$measure == 'socialPresence')
+
+
+### Set variables for questionnaireExperimental
+experimentalSO = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'SO')
+experimentalSP1 = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'SP1')
+experimentalSP2 = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'SP2')
+experimentalPNGA = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'PNGA')
+experimentalprogress1 = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'progress1')
+experimentalprogress2 = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'progress2')
+experimentalparticipation = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'participation')
+experimentalfeedback1 = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'feedback1')
+experimentalfeedback2 = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'feedback2')
+experimentalsocialPresence = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'socialPresence')
+experimentalsystemNovelty = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'systemNovelty')
+experimentalbodyNovelty = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'bodyNovelty')
+experimentalfaceNovelty = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'faceNovelty')
+experimentalimmediacy = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'immediacy')
+experimentalaccuracy = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'accuracy')
+experimentallearnability = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'learnability')
+experimentalfrustration = subset(questionnaireExperimental$value, questionnaireExperimental$measure == 'frustration')
+
+
+### Normality Test for questionnaireControl
+shapiro.test(controlSO)
+shapiro.test(controlSP1)
+shapiro.test(controlSP2)
+shapiro.test(controlPNGA)
+shapiro.test(controlprogress1)
+shapiro.test(controlprogress2)
+shapiro.test(controlparticipation)
+shapiro.test(controlfeedback1)
+shapiro.test(controlfeedback2)
+shapiro.test(controlsocialPresence)
+
+
+### Normality Test for questionnaireExperimental
+shapiro.test(experimentalSO)
+shapiro.test(experimentalSP1)
+shapiro.test(experimentalSP2)
+shapiro.test(experimentalPNGA)
+shapiro.test(experimentalprogress1)
+shapiro.test(experimentalprogress2)
+shapiro.test(experimentalparticipation)
+shapiro.test(experimentalfeedback1)
+shapiro.test(experimentalfeedback2)
+shapiro.test(experimentalsocialPresence)
+shapiro.test(experimentalsystemNovelty)
+shapiro.test(experimentalbodyNovelty)
+shapiro.test(experimentalfaceNovelty)
+shapiro.test(experimentalimmediacy)
+shapiro.test(experimentalaccuracy)
+shapiro.test(experimentallearnability)
+shapiro.test(experimentalfrustration)
+
+
+#### Wilcoxon rank sum test between control group & experimental group
+wilcox.test(controlSO, experimentalSO)
+wilcox.test(controlSP1, experimentalSP1)
+wilcox.test(controlSP1, experimentalSP2)
+wilcox.test(controlPNGA, experimentalPNGA)
+wilcox.test(controlprogress1, experimentalprogress1)
+wilcox.test(controlprogress2, experimentalprogress2)
+wilcox.test(controlparticipation, experimentalparticipation)
+wilcox.test(controlfeedback1, experimentalfeedback1)
+wilcox.test(controlfeedback2, experimentalfeedback2)
+wilcox.test(controlsocialPresence, experimentalsocialPresence)
+
+
+### Box plot of control group & experimental group (SO~socialPresence)
+# Define each variables
+questionnaireMerge$value <- as.numeric(questionnaireMerge$value)
+questionnaireMerge$group <- as.factor(questionnaireMerge$group)
+questionnaireMerge$measure <- factor(questionnaireMerge$measure, level=c("SO", "SP1", "SP2", "PNGA","progress1", "progress2", "participation","feedback1", "feedback2", "socialPresence"))
+
+
+mergeFile <- ggplot(questionnaireMerge, aes(x=measure, y=value, fill=group)) + geom_boxplot() + 
+  #scale_x_discrete(labels=c("SO", "SP1", "SP2", "PNGA", "P", "PE", "A", "F1", "F2", "SPS")) +
+  scale_x_discrete(labels=c("Satisfaction\nwith outcome", "Satsfaction\nwith process", "Meeting activeness",
+                            "Perceived net goal\nattainment", "Meeting speed", "Positive\nExperience", "Concentration",
+                            "Other people's\nfeedback", "Feedback\nto other people", "Social presence")) +
+  scale_fill_discrete(labels=c("Control group", "Experimental group")) +
+  scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5,6,7)) + 
+  coord_cartesian(ylim = c(1, 7)) +
+  labs(title="Quantitative user evaluation of meeting experience through questionnaire", x="", y = "Score", fill = "Group") + 
+  theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
+mergeFile
+
+
+ ### Box plot of experimental group (systemNovelty ~ frustration)
+experimentalSystemEvaluation$measure <- factor(experimentalSystemEvaluation$measure, level=c('systemNovelty', 'bodyNovelty', 'faceNovelty', 'immediacy', 'accuracy', 'learnability', 'frustration'))
+experimentalSystemEvaluation$value <- as.numeric(experimentalSystemEvaluation$value)
+systemEvaluation <- ggplot(experimentalSystemEvaluation, aes(x=measure, y=value)) + geom_boxplot(fill = "#01BFC4") +
+  scale_x_discrete(labels=c("Novelty of system", "Novelty of body gestures", "Novelty of facial epxression", "Recognition immediacy", "Recognition accuracy", "System Learnability", "Frustration")) +
+  labs(title="System evaluation of experimental group", x="", y = "Score") +
+  theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
+systemEvaluation
+
+
+### Control group Box plot

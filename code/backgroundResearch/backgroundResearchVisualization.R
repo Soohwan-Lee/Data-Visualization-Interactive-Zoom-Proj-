@@ -20,7 +20,7 @@ setwd("/Users/Soohwan/Desktop/DataVisualization-ZoomProj")
 
 
 ### Read Raw Data
-data <- read.csv(file = "./data/questionnaire/rawData/rawData.csv", header=T, fileEncoding="UTF-8-BOM")
+data <- read.csv(file = "./data/backgroundResearch/rawData/rawData.csv", header=T, fileEncoding="UTF-8-BOM")
 
 
 
@@ -42,7 +42,7 @@ shapiro.test(data$onlineAggressivity)
 shapiro.test(data$onlineMeetingParticipationChange)
 shapiro.test(data$onlineClassParticipationChange)
 
-# Online Experience - Overal Satisfaction
+# Online Experience - Overall Satisfaction
 shapiro.test(data$onlineSatisfaction)
 shapiro.test(data$onlineVerbalSatisfaction)
 shapiro.test(data$onlineNonverbalSatisfaction)
