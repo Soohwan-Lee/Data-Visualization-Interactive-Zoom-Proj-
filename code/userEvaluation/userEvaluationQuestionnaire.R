@@ -123,13 +123,13 @@ wilcox.test(controlsocialPresence, experimentalsocialPresence)
 # Define each variables
 questionnaireMerge$value <- as.numeric(questionnaireMerge$value)
 questionnaireMerge$group <- as.factor(questionnaireMerge$group)
-questionnaireMerge$measure <- factor(questionnaireMerge$measure, level=c("SO", "SP1", "SP2", "PNGA","progress1", "progress2", "participation","feedback1", "feedback2", "socialPresence"))
+questionnaireMerge$measure <- factor(questionnaireMerge$measure, level=c("progress2", "SO", "SP1", "PNGA", "progress1", "SP2", "participation","feedback1", "feedback2", "socialPresence"))
 
 
 mergeFile <- ggplot(questionnaireMerge, aes(x=measure, y=value, fill=group)) + geom_boxplot() + 
   #scale_x_discrete(labels=c("SO", "SP1", "SP2", "PNGA", "P", "PE", "A", "F1", "F2", "SPS")) +
-  scale_x_discrete(labels=c("Satisfaction\nwith outcome", "Satsfaction\nwith process", "Meeting activeness",
-                            "Perceived net goal\nattainment", "Meeting speed", "Positive\nExperience", "Concentration",
+  scale_x_discrete(labels=c("Positive\nexperience", "Satisfaction\nwith outcome", "Satsfaction\nwith process",
+                            "Perceived net goal\nattainment", "Progress speed", "Activeness\nin meeting", "Concentration\nin meeting",
                             "Other people's\nfeedback", "Feedback\nto other people", "Social presence")) +
   scale_fill_discrete(labels=c("Control group", "Experimental group")) +
   scale_y_continuous(trans = my_trans( from=1),breaks = c(1,2,3,4,5,6,7)) + 
@@ -143,7 +143,7 @@ mergeFile
 experimentalSystemEvaluation$measure <- factor(experimentalSystemEvaluation$measure, level=c('systemNovelty', 'bodyNovelty', 'faceNovelty', 'immediacy', 'accuracy', 'learnability', 'frustration'))
 experimentalSystemEvaluation$value <- as.numeric(experimentalSystemEvaluation$value)
 systemEvaluation <- ggplot(experimentalSystemEvaluation, aes(x=measure, y=value)) + geom_boxplot(fill = "#01BFC4") +
-  scale_x_discrete(labels=c("Novelty of system", "Novelty of body gestures", "Novelty of facial epxression", "Recognition immediacy", "Recognition accuracy", "System Learnability", "Frustration")) +
+  scale_x_discrete(labels=c("Novelty of system", "Novelty of body gesture", "Novelty of facial expression", "Recognition immediacy", "Recognition accuracy", "System learnability", "Frustration")) +
   labs(title="System evaluation of experimental group", x="", y = "Score") +
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
 systemEvaluation
