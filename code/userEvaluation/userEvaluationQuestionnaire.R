@@ -262,7 +262,7 @@ systemEvaluation <- ggplot(experimentalSystemEvaluation, aes(x=measure, y=value)
   coord_cartesian(ylim = c(1, 7)) +
   geom_point(aes(color = 'measure'), position=position_jitterdodge(), show.legend = F) +
   scale_color_manual(values = c("#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4", "#01BFC4")) +
-  labs(title="Concept and system evaluation of experimental group", x="", y = "Score") +
+  labs(title="Quantitative concept and system evaluation of experimental group", x="", y = "Score") +
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
 systemEvaluation
 
@@ -303,7 +303,7 @@ experimentalMeetingExperienceCompare <- ggplot(experimentalMeetingExperience, ae
   guides(color="none") +
   scale_color_manual(values = c("#01BFC4", "#01BFC4")) +
   scale_pattern_discrete(labels = c("First group", "Second group")) +
-  labs(title="Questionnaire result(meeting experience) of the first and second group of experimental group", x="", y = "Score", pattern = "Control group") + 
+  labs(title="Questionnaire result(meeting experience) of the first and second group of experimental group", x="", y = "Score", pattern = "Experimental group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
 experimentalMeetingExperienceCompare
 
@@ -321,6 +321,6 @@ experimentalSystemEvaluationCompare <- ggplot(experimentalSystemEvaluation, aes(
   guides(color="none") +
   scale_color_manual(values = c("#01BFC4", "#01BFC4")) +
   scale_pattern_discrete(labels = c("First group", "Second group")) +
-  labs(title="Questionnaire result(system evaluation) of the first and second group of experimental group", x="", y = "Score", pattern = "Control group") + 
+  labs(title="Questionnaire result(system evaluation) of the first and second group of experimental group", x="", y = "Score", pattern = "Experimental group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
 experimentalSystemEvaluationCompare
