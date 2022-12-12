@@ -15,7 +15,7 @@ library(dplyr)
 ### Set File Path for Window Environment
 setwd('C:/Users/LeeSooHwan/Desktop/github/DataVisualization-ZoomProj')
 ### Set File Path for Mac Environment
-setwd("/Users/Soohwan/Desktop/DataVisualization-ZoomProj")
+setwd("/Users/Soohwan/Desktop/github/DataVisualization-ZoomProj")
 
 
 
@@ -75,7 +75,7 @@ my_trans <- function(from=0)
 
 ### Previous Experience for On/Offline Meeting ###
 # Data Preprocessing
-previousExperience <- read.csv(file = "./data/questionnaire/revisedData/previousExperienceFinal.csv", header=T, fileEncoding="UTF-8-BOM")
+previousExperience <- read.csv(file = "./data/backgroundResearch/revisedData/previousExperienceFinal.csv", header=T, fileEncoding="UTF-8-BOM")
 head(previousExperience)
 m <- c("offline", "online")
 k <- c("experience", "activeness")

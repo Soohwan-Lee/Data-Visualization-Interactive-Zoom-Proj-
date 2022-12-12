@@ -11,7 +11,7 @@ library(dplyr)
 ### Set File Path for Window Environment
 setwd('C:/Users/LeeSooHwan/Desktop/github/DataVisualization-ZoomProj')
 ### Set File Path for Mac Environment
-setwd("/Users/Soohwan/Desktop/DataVisualization-ZoomProj")
+setwd("/Users/Soohwan/Desktop/github/DataVisualization-ZoomProj")
 
 
 
