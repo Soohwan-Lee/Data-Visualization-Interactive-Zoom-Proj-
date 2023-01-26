@@ -1,2 +1,2 @@
-# Data-Visualization-Interactive-Zoom-Proj
+# NEAS - Data Visualization
 Data Visualization of Quantitative Materials
