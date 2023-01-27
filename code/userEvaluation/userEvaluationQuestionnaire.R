@@ -15,9 +15,9 @@ library(dplyr)
 # --------------- #
 
 ### Set File Path for Window Environment
-setwd('C:/Users/LeeSooHwan/Desktop/github/DataVisualization-ZoomProj')
+setwd('C:/Users/LeeSooHwan/Desktop/github/NEASdataVisualization')
 ### Set File Path for Mac Environment
-setwd("/Users/Soohwan/Desktop/DataVisualization-ZoomProj")
+setwd("/Users/Soohwan/Desktop/Github/NEASdataVisualization")
 
 
 ### Read Raw Data
@@ -324,3 +324,4 @@ experimentalSystemEvaluationCompare <- ggplot(experimentalSystemEvaluation, aes(
   labs(title="Questionnaire result(system evaluation) of the first and second group of experimental group", x="", y = "Score", pattern = "Experimental group") + 
   theme(plot.title = element_text(hjust = 0.5), text=element_text(size=15),legend.position = "left")
 experimentalSystemEvaluationCompare
+
